@@ -1,0 +1,202 @@
+:root{
+  --bg0:#050914;
+  --bg1:#0b1220;
+  --txt:#eaf2ff;
+  --muted:rgba(234,242,255,.72);
+  --glass:rgba(255,255,255,.08);
+  --glass2:rgba(255,255,255,.12);
+  --stroke:rgba(255,255,255,.16);
+  --glow:rgba(120,180,255,.22);
+  --good:rgba(104,255,198,.9);
+  --warn:rgba(255,198,104,.95);
+  --radius:18px;
+}
+
+*{box-sizing:border-box}
+html,body{height:100%}
+body{
+  margin:0;
+  font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Arial, "Apple Color Emoji","Segoe UI Emoji";
+  color:var(--txt);
+  background: radial-gradient(1200px 700px at 20% 0%, #13204a 0%, transparent 60%),
+              radial-gradient(900px 700px at 90% 30%, #2a1458 0%, transparent 55%),
+              linear-gradient(180deg, var(--bg0), var(--bg1));
+  overflow-x:hidden;
+}
+
+/* animated background blobs (motion blur feel) */
+.bg{position:fixed; inset:0; pointer-events:none; overflow:hidden}
+.blob{
+  position:absolute;
+  width:520px; height:520px;
+  filter: blur(26px) saturate(120%);
+  opacity:.55;
+  transform: translate3d(0,0,0);
+  mix-blend-mode: screen;
+}
+.blob-a{
+  left:-180px; top:80px;
+  background: radial-gradient(circle at 30% 30%, rgba(120,180,255,.95), transparent 60%),
+              radial-gradient(circle at 70% 70%, rgba(255,120,220,.8), transparent 62%);
+  animation: floatA 12s ease-in-out infinite;
+}
+.blob-b{
+  right:-220px; bottom:-120px;
+  background: radial-gradient(circle at 40% 35%, rgba(104,255,198,.8), transparent 62%),
+              radial-gradient(circle at 70% 70%, rgba(255,198,104,.7), transparent 60%);
+  animation: floatB 14s ease-in-out infinite;
+}
+
+@keyframes floatA{
+  0%{transform: translate(-10px, 0px) scale(1)}
+  50%{transform: translate(40px, 20px) scale(1.06)}
+  100%{transform: translate(-10px, 0px) scale(1)}
+}
+@keyframes floatB{
+  0%{transform: translate(10px, 0px) scale(1)}
+  50%{transform: translate(-30px, -30px) scale(1.07)}
+  100%{transform: translate(10px, 0px) scale(1)}
+}
+
+/* film grain */
+.grain{
+  position:absolute; inset:0;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='220' height='220'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='220' height='220' filter='url(%23n)' opacity='.25'/%3E%3C/svg%3E");
+  opacity:.08;
+  mix-blend-mode: overlay;
+}
+
+.app{
+  position:relative;
+  max-width:520px;
+  margin:0 auto;
+  padding: 18px 14px calc(18px + env(safe-area-inset-bottom));
+}
+
+.top{padding-top: 10px}
+.title-wrap{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:14px 14px;
+}
+h1{font-size:20px; margin:0 0 4px 0; letter-spacing:.2px}
+.sub{margin:0; color:var(--muted); font-size:13px}
+
+.cards{display:flex; flex-direction:column; gap:12px; margin-top:12px}
+
+.glass{
+  background: linear-gradient(180deg, var(--glass2), var(--glass));
+  border: 1px solid var(--stroke);
+  border-radius: var(--radius);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  box-shadow:
+    0 18px 60px rgba(0,0,0,.35),
+    0 0 0 1px rgba(255,255,255,.05) inset,
+    0 0 40px var(--glow);
+}
+
+.card{padding:14px}
+.card-head{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  margin-bottom:10px;
+}
+h2{font-size:14px; margin:0; color:rgba(234,242,255,.92); letter-spacing:.2px}
+
+.badge{
+  font-size:12px;
+  color: rgba(234,242,255,.9);
+  padding:6px 10px;
+  border-radius:999px;
+  background: rgba(255,255,255,.08);
+  border: 1px solid rgba(255,255,255,.12);
+}
+
+.pill{
+  appearance:none;
+  border:1px solid rgba(255,255,255,.16);
+  background: rgba(255,255,255,.08);
+  color: var(--txt);
+  padding:10px 12px;
+  border-radius:999px;
+  font-weight:600;
+  letter-spacing:.2px;
+  cursor:pointer;
+  transition: transform .15s ease, background .2s ease;
+}
+.pill:active{transform: scale(.98)}
+.pill:hover{background: rgba(255,255,255,.12)}
+
+.timer{
+  display:flex;
+  align-items:baseline;
+  justify-content:center;
+  gap:10px;
+  padding: 10px 0 2px;
+}
+.t{min-width:86px; text-align:center}
+.n{
+  font-variant-numeric: tabular-nums;
+  font-size:40px;
+  font-weight:800;
+  letter-spacing:.6px;
+  text-shadow: 0 0 22px rgba(120,180,255,.18);
+}
+.l{font-size:12px; color:var(--muted); margin-top:2px}
+.sep{opacity:.5; font-weight:700}
+
+.hint{margin-top:8px; text-align:center; color:var(--muted); font-size:13px}
+
+.grid{
+  display:grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap:10px;
+}
+.tile{
+  padding:10px 10px;
+  border-radius:14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+}
+.k{font-size:12px; color:var(--muted)}
+.v{font-size:16px; font-weight:800; margin-top:6px}
+
+.note{margin-top:10px; color:var(--muted); font-size:13px}
+.muted{color:var(--muted)}
+.small{font-size:12px}
+
+.surah{
+  padding:14px;
+  border-radius:14px;
+  background: rgba(255,255,255,.06);
+  border: 1px solid rgba(255,255,255,.12);
+}
+.surah-name{font-size:18px; font-weight:900; letter-spacing:.2px}
+.surah-meta{margin-top:6px; color:var(--muted); font-size:13px}
+
+.list{display:flex; flex-direction:column; gap:8px; max-height: 380px; overflow:auto; padding-right:4px}
+.row{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+  gap:12px;
+  padding:10px 10px;
+  border-radius:14px;
+  background: rgba(255,255,255,.05);
+  border: 1px solid rgba(255,255,255,.10);
+}
+.row .d{font-size:13px; color:rgba(234,242,255,.9)}
+.row .m{font-size:13px; font-weight:800}
+.row .s{font-size:12px; color:var(--muted)}
+
+.footer{margin-top:12px; padding-bottom: 4px}
+.footer-inner{
+  display:flex; align-items:center; justify-content:center; gap:10px;
+  padding:10px 12px;
+  border-radius:999px;
+}
+.dot{width:4px; height:4px; border-radius:999px; background: rgba(234,242,255,.35)}

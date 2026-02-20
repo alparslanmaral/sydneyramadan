@@ -1,0 +1,105 @@
+<!doctype html>
+<html lang="tr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+  <title>Sydney’de Ramazan</title>
+  <meta name="theme-color" content="#0b1220" />
+
+  <link rel="manifest" href="manifest.webmanifest" />
+  <link rel="icon" href="img/icon-192.png" />
+  <link rel="apple-touch-icon" href="img/icon-192.png" />
+
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="bg">
+    <div class="blob blob-a"></div>
+    <div class="blob blob-b"></div>
+    <div class="grain"></div>
+  </div>
+
+  <main class="app">
+    <header class="top">
+      <div class="title-wrap glass">
+        <div>
+          <h1>Sydney’de Ramazan</h1>
+          <p class="sub" id="todayMeta">—</p>
+        </div>
+        <button class="pill" id="installBtn" hidden>Yükle</button>
+      </div>
+    </header>
+
+    <section class="cards">
+      <article class="glass card">
+        <div class="card-head">
+          <h2>Kalan Süre</h2>
+          <span class="badge" id="countdownMode">—</span>
+        </div>
+
+        <div class="timer" id="countdown">
+          <div class="t">
+            <div class="n" id="hh">00</div><div class="l">saat</div>
+          </div>
+          <div class="sep">:</div>
+          <div class="t">
+            <div class="n" id="mm">00</div><div class="l">dk</div>
+          </div>
+          <div class="sep">:</div>
+          <div class="t">
+            <div class="n" id="ss">00</div><div class="l">sn</div>
+          </div>
+        </div>
+
+        <div class="hint" id="nextEventHint">—</div>
+      </article>
+
+      <article class="glass card">
+        <div class="card-head">
+          <h2>Bugünün Vakitleri</h2>
+          <span class="badge" id="hijri">—</span>
+        </div>
+
+        <div class="grid" id="timesGrid"></div>
+
+        <div class="note">
+          Teravih: <strong id="teravih">—</strong> <span class="muted">(Yatsı)</span>
+        </div>
+      </article>
+
+      <article class="glass card">
+        <div class="card-head">
+          <h2>Kur’an’dan Sureler</h2>
+          <span class="badge">20 sn</span>
+        </div>
+
+        <div class="surah" id="surahBox">
+          <div class="surah-name" id="surahName">—</div>
+          <div class="surah-meta" id="surahMeta">—</div>
+        </div>
+
+        <div class="small muted">Rastgele sırayla değişir.</div>
+      </article>
+
+      <article class="glass card">
+        <div class="card-head">
+          <h2>Tüm Günler</h2>
+          <span class="badge">Sydney</span>
+        </div>
+
+        <div class="list" id="daysList"></div>
+      </article>
+    </section>
+
+    <footer class="footer">
+      <div class="glass footer-inner">
+        <span class="muted">PWA • Offline destek</span>
+        <span class="dot"></span>
+        <span class="muted" id="offlineStatus">Online</span>
+      </div>
+    </footer>
+  </main>
+
+  <script src="app.js"></script>
+</body>
+</html>
